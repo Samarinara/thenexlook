@@ -1,19 +1,29 @@
-import { Button } from "@/components/ui/button"
+import { getLooks } from "@/lib/looks"
+import { PortfolioGrid } from "@/components/portfolio-grid"
 
 export default function Page() {
+  const looks = getLooks()
+
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
+    <main className="min-h-svh">
+      <section className="border-b-2 border-border bg-main px-6 py-16 text-main-foreground sm:px-8 sm:py-24">
+        <div className="mx-auto max-w-5xl">
+          <h1 className="text-4xl font-heading sm:text-6xl">The Nex Look</h1>
+          <p className="mt-4 max-w-lg text-lg font-base sm:text-xl">
+            Editorial makeup artistry that transforms. Each look tells a story.
+          </p>
+          <a
+            href="/studio"
+            className="mt-6 inline-block rounded-base border-2 border-border bg-secondary-background px-4 py-2 font-base text-sm text-foreground shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"
+          >
+            Studio
+          </a>
         </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+        <PortfolioGrid looks={looks} />
+      </section>
+    </main>
   )
 }
