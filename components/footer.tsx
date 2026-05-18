@@ -47,9 +47,9 @@ export function Footer() {
             href="https://samkatevatis.polli.page/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg italic underline decoration-2 underline-offset-4 transition-colors hover:text-secondary-background"
+            className="text-lg underline decoration-2 underline-offset-4 transition-colors hover:text-secondary-background"
           >
-            Built by Sam Katevatis
+            Built with ❤️ by Sam Katevatis
           </a>
         </div>
       </div>
