@@ -3,7 +3,7 @@ import { getLooks, createLook } from "@/lib/looks"
 import { verifySessionToken } from "@/lib/auth"
 
 export async function GET() {
-  const looks = getLooks()
+  const looks = await getLooks()
   return Response.json(looks)
 }
 
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
       )
     }
 
-    const look = createLook({
+    const look = await createLook({
       title: data.title,
       description: data.description || "",
       images: data.images,

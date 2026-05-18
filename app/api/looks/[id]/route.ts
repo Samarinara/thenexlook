@@ -13,14 +13,14 @@ export async function PUT(
   }
 
   const { id } = await params
-  const existing = getLook(id)
+  const existing = await getLook(id)
   if (!existing) {
     return Response.json({ error: "Not found" }, { status: 404 })
   }
 
   try {
     const data = await req.json()
-    const updated = updateLook(id, data)
+    const updated = await updateLook(id, data)
     return Response.json(updated)
   } catch {
     return Response.json({ error: "Invalid request" }, { status: 400 })
@@ -38,7 +38,7 @@ export async function DELETE(
   }
 
   const { id } = await params
-  const deleted = deleteLook(id)
+  const deleted = await deleteLook(id)
   if (!deleted) {
     return Response.json({ error: "Not found" }, { status: 404 })
   }

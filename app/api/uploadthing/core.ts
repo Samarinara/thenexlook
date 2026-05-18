@@ -13,6 +13,7 @@ export const ourFileRouter = {
       return { uploadedAt: new Date().toISOString() }
     })
     .onUploadComplete(async ({ metadata, file }) => {
+      console.log("UploadThing onUploadComplete:", { metadata, file })
       return { uploadedAt: metadata.uploadedAt, url: file.ufsUrl }
     }),
 } satisfies FileRouter

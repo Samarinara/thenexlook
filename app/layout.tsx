@@ -5,6 +5,7 @@ import { extractRouterConfig } from "uploadthing/server"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Footer } from "@/components/footer"
 import { ourFileRouter } from "@/app/api/uploadthing/core"
 import { cn } from "@/lib/utils"
 
@@ -39,7 +40,10 @@ export default function RootLayout({
     >
       <body>
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   )

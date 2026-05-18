@@ -128,11 +128,15 @@ export function LookForm({
 
         <UploadDropzone
           endpoint="lookImage"
+          config={{ mode: "auto" }}
           onClientUploadComplete={(res) => {
-            const urls = res.map((f) => f.url)
+            console.log("UploadThing response:", res)
+            const urls = res.map((f) => f.ufsUrl || f.url)
+            console.log("Extracted URLs:", urls)
             setImages((prev) => [...prev, ...urls])
           }}
           onUploadError={(err) => {
+            console.error("UploadThing error:", err)
             setError(err.message)
           }}
         />

@@ -1,59 +1,83 @@
-import fs from "fs"
-import path from "path"
+import { ensureDb } from "@/lib/db"
 import type { Look } from "@/lib/types"
 
-const DATA_FILE = path.join(process.cwd(), "data", "looks.json")
-
-function readLooks(): Look[] {
-  try {
-    const raw = fs.readFileSync(DATA_FILE, "utf-8")
-    return JSON.parse(raw) as Look[]
-  } catch {
-    return []
+function rowToLook(row: Record<string, unknown>): Look {
+  return {
+    id: row.id as string,
+    title: row.title as string,
+    description: row.description as string,
+    images: JSON.parse(row.images as string) as string[],
+    coverIndex: row.coverIndex as number,
+    createdAt: row.createdAt as string,
   }
 }
 
-function writeLooks(looks: Look[]): void {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(looks, null, 2), "utf-8")
+export async function getLooks(): Promise<Look[]> {
+  const db = await ensureDb()
+  const result = await db.execute("SELECT * FROM looks ORDER BY createdAt DESC")
+  return result.rows.map(rowToLook)
 }
 
-export function getLooks(): Look[] {
-  return readLooks()
+export async function getLook(id: string): Promise<Look | null> {
+  const db = await ensureDb()
+  const result = await db.execute({
+    sql: "SELECT * FROM looks WHERE id = ?",
+    args: [id],
+  })
+  if (result.rows.length === 0) return null
+  return rowToLook(result.rows[0])
 }
 
-export function getLook(id: string): Look | undefined {
-  return readLooks().find((l) => l.id === id)
-}
-
-export function createLook(data: Omit<Look, "id" | "createdAt">): Look {
-  const looks = readLooks()
+export async function createLook(
+  data: Omit<Look, "id" | "createdAt">
+): Promise<Look> {
+  const db = await ensureDb()
   const look: Look = {
     ...data,
     id: crypto.randomUUID(),
     createdAt: new Date().toISOString(),
   }
-  looks.push(look)
-  writeLooks(looks)
+  await db.execute({
+    sql: "INSERT INTO looks (id, title, description, images, coverIndex, createdAt) VALUES (?, ?, ?, ?, ?, ?)",
+    args: [
+      look.id,
+      look.title,
+      look.description,
+      JSON.stringify(look.images),
+      look.coverIndex,
+      look.createdAt,
+    ],
+  })
   return look
 }
 
-export function updateLook(
+export async function updateLook(
   id: string,
   data: Partial<Omit<Look, "id" | "createdAt">>
-): Look | null {
-  const looks = readLooks()
-  const index = looks.findIndex((l) => l.id === id)
-  if (index === -1) return null
-  looks[index] = { ...looks[index], ...data }
-  writeLooks(looks)
-  return looks[index]
+): Promise<Look | null> {
+  const existing = await getLook(id)
+  if (!existing) return null
+
+  const updated: Look = { ...existing, ...data }
+  const db = await ensureDb()
+  await db.execute({
+    sql: "UPDATE looks SET title = ?, description = ?, images = ?, coverIndex = ? WHERE id = ?",
+    args: [
+      updated.title,
+      updated.description,
+      JSON.stringify(updated.images),
+      updated.coverIndex,
+      id,
+    ],
+  })
+  return updated
 }
 
-export function deleteLook(id: string): boolean {
-  const looks = readLooks()
-  const index = looks.findIndex((l) => l.id === id)
-  if (index === -1) return false
-  looks.splice(index, 1)
-  writeLooks(looks)
-  return true
+export async function deleteLook(id: string): Promise<boolean> {
+  const db = await ensureDb()
+  const result = await db.execute({
+    sql: "DELETE FROM looks WHERE id = ?",
+    args: [id],
+  })
+  return result.rowsAffected > 0
 }

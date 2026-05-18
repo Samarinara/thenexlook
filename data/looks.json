@@ -1,53 +1,12 @@
 [
   {
-    "id": "seed-1",
-    "title": "Golden Hour Glam",
-    "description": "Warm bronze tones meet golden highlights in this sun-kissed look. Perfect for evening events and summer weddings.",
+    "title": "Cool Example",
+    "description": ":D",
     "images": [
-      "https://picsum.photos/seed/golden1/600/800",
-      "https://picsum.photos/seed/golden2/600/800",
-      "https://picsum.photos/seed/golden3/600/800"
+      "https://oh61prof8s.ufs.sh/f/74bPmLASJP5vEcghxg77f8axYzlQcvKT5CeGpHhdbPNowLir"
     ],
     "coverIndex": 0,
-    "createdAt": "2026-01-15T10:00:00.000Z"
-  },
-  {
-    "id": "seed-2",
-    "title": "Bold & Berry",
-    "description": "A vibrant berry-stained lip paired with soft smoky eyes. This look transitions effortlessly from desk to dinner.",
-    "images": [
-      "https://picsum.photos/seed/berry1/600/800",
-      "https://picsum.photos/seed/berry2/600/800",
-      "https://picsum.photos/seed/berry3/600/800",
-      "https://picsum.photos/seed/berry4/600/800"
-    ],
-    "coverIndex": 0,
-    "createdAt": "2026-02-20T14:30:00.000Z"
-  },
-  {
-    "id": "seed-3",
-    "title": "Soft Romance",
-    "description": "Blush pinks and pearl highlights create an ethereal, romantic aesthetic. Ideal for bridal or spring editorial shoots.",
-    "images": [
-      "https://picsum.photos/seed/romance1/600/800",
-      "https://picsum.photos/seed/romance2/600/800",
-      "https://picsum.photos/seed/romance3/600/800"
-    ],
-    "coverIndex": 0,
-    "createdAt": "2026-03-10T09:15:00.000Z"
-  },
-  {
-    "id": "seed-4",
-    "title": "Edge & Smoke",
-    "description": "Dark smoked-out liner with a matte complexion and a statement lip. A bold look for editorial and nightlife.",
-    "images": [
-      "https://picsum.photos/seed/smoke1/600/800",
-      "https://picsum.photos/seed/smoke2/600/800",
-      "https://picsum.photos/seed/smoke3/600/800",
-      "https://picsum.photos/seed/smoke4/600/800",
-      "https://picsum.photos/seed/smoke5/600/800"
-    ],
-    "coverIndex": 0,
-    "createdAt": "2026-04-05T16:45:00.000Z"
+    "id": "5e50b582-6e1f-476f-be75-bb9a267eb14d",
+    "createdAt": "2026-05-18T18:22:32.255Z"
   }
 ]
