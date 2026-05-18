@@ -1,21 +1,52 @@
-# Next.js template
+# The Nex Look — Makeup Artistry Portfolio
 
-This is a Next.js template with shadcn/ui.
+A makeup artistry portfolio built with [Next.js](https://nextjs.org) (16), [Tailwind CSS](https://tailwindcss.com) (v4), and [shadcn/ui](https://ui.shadcn.com).
 
-## Adding components
+## Features
 
-To add components to your app, run the following command:
+- **Portfolio Grid** — Displays makeup looks with image carousels
+- **Studio** — Authenticated dashboard to create, edit, and delete looks
+- **Image Upload** — Powered by UploadThing
+- **Dark Mode** — Theme toggle using `next-themes`
+- **Animations** — Framer Motion, marquee ticker, floating decorations, scroll progress
+
+## Getting Started
 
 ```bash
-npx shadcn@latest add button
+pnpm install
+pnpm dev
 ```
 
-This will place the ui components in the `components` directory.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Using components
+## Environment Variables
 
-To use the components in your app, import them as follows:
+Create a `.env.local` file:
 
-```tsx
-import { Button } from "@/components/ui/button";
 ```
+TURSO_DB_URL=...
+TURSO_DB_AUTH_TOKEN=...
+UPLOADTHING_TOKEN=...
+AUTH_SECRET=...
+```
+
+## Scripts
+
+| Command            | Description          |
+| ------------------ | -------------------- |
+| `pnpm dev`         | Start dev server     |
+| `pnpm build`       | Production build     |
+| `pnpm start`       | Start production     |
+| `pnpm lint`        | Run ESLint           |
+| `pnpm typecheck`   | Run TypeScript check |
+| `pnpm format`      | Format with Prettier |
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4 + tw-animate-css
+- **UI:** shadcn/ui, Radix, Base UI, Lucide icons
+- **Database:** Turso (libSQL)
+- **Storage:** UploadThing
+- **Animation:** Framer Motion, Embla Carousel
