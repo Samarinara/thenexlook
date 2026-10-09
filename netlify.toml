@@ -1,0 +1,12 @@
+[build]
+  command = "pnpm build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[context.deploy-preview.environment]
+  BLOB_STORE_PREFIX = "thenexlook-preview"
+
+[context.branch-deploy.environment]
+  BLOB_STORE_PREFIX = "thenexlook-branch"
