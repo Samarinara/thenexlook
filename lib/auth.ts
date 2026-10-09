@@ -1,7 +1,14 @@
 import crypto from "crypto"
 
 function getSecret(): string {
-  return process.env.AUTH_SECRET || "dev-fallback-secret"
+  const secret = process.env.AUTH_SECRET
+  if (
+    process.env.NODE_ENV === "production" &&
+    (!secret || secret.length < 32)
+  ) {
+    throw new Error("Set AUTH_SECRET to at least 32 random characters")
+  }
+  return secret || "dev-fallback-secret"
 }
 
 export function createSessionToken(): string {
@@ -26,10 +33,19 @@ export function verifySessionToken(token: string): boolean {
       .createHmac("sha256", getSecret())
       .update(payloadStr)
       .digest("hex")
-    if (hmac !== expectedHmac) return false
+    if (!/^[a-f0-9]{64}$/.test(hmac)) return false
+    const signature = Buffer.from(hmac, "hex")
+    const expected = Buffer.from(expectedHmac, "hex")
+    if (
+      signature.length !== expected.length ||
+      !crypto.timingSafeEqual(signature, expected)
+    )
+      return false
 
     const maxAge = 24 * 60 * 60 * 1000
-    if (Date.now() - payload.timestamp > maxAge) return false
+    const age = Date.now() - payload.timestamp
+    if (!Number.isFinite(payload.timestamp) || age < 0 || age > maxAge)
+      return false
 
     return payload.authenticated === true
   } catch {

@@ -1,53 +1,33 @@
-import { ensureDb } from "@/lib/db"
+import { portfolioStore } from "@/lib/storage"
 import type { Look } from "@/lib/types"
 
-function rowToLook(row: Record<string, unknown>): Look {
-  return {
-    id: row.id as string,
-    title: row.title as string,
-    description: row.description as string,
-    images: JSON.parse(row.images as string) as string[],
-    coverIndex: row.coverIndex as number,
-    createdAt: row.createdAt as string,
-  }
-}
-
 export async function getLooks(): Promise<Look[]> {
-  const db = await ensureDb()
-  const result = await db.execute("SELECT * FROM looks ORDER BY createdAt DESC")
-  return result.rows.map(rowToLook)
+  const store = portfolioStore("looks")
+  const looks: Look[] = []
+  for await (const page of store.list({ paginate: true })) {
+    const entries = await Promise.all(
+      page.blobs.map(
+        ({ key }) => store.get(key, { type: "json" }) as Promise<Look | null>
+      )
+    )
+    looks.push(...entries.filter((look): look is Look => look !== null))
+  }
+  return looks.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
 }
 
 export async function getLook(id: string): Promise<Look | null> {
-  const db = await ensureDb()
-  const result = await db.execute({
-    sql: "SELECT * FROM looks WHERE id = ?",
-    args: [id],
-  })
-  if (result.rows.length === 0) return null
-  return rowToLook(result.rows[0])
+  return portfolioStore("looks").get(id, { type: "json" })
 }
 
 export async function createLook(
   data: Omit<Look, "id" | "createdAt">
 ): Promise<Look> {
-  const db = await ensureDb()
   const look: Look = {
     ...data,
     id: crypto.randomUUID(),
     createdAt: new Date().toISOString(),
   }
-  await db.execute({
-    sql: "INSERT INTO looks (id, title, description, images, coverIndex, createdAt) VALUES (?, ?, ?, ?, ?, ?)",
-    args: [
-      look.id,
-      look.title,
-      look.description,
-      JSON.stringify(look.images),
-      look.coverIndex,
-      look.createdAt,
-    ],
-  })
+  await portfolioStore("looks").setJSON(look.id, look)
   return look
 }
 
@@ -57,27 +37,20 @@ export async function updateLook(
 ): Promise<Look | null> {
   const existing = await getLook(id)
   if (!existing) return null
-
-  const updated: Look = { ...existing, ...data }
-  const db = await ensureDb()
-  await db.execute({
-    sql: "UPDATE looks SET title = ?, description = ?, images = ?, coverIndex = ? WHERE id = ?",
-    args: [
-      updated.title,
-      updated.description,
-      JSON.stringify(updated.images),
-      updated.coverIndex,
-      id,
-    ],
-  })
+  // Keep identity and creation date immutable even if supplied by the client.
+  const updated: Look = {
+    ...existing,
+    title: data.title ?? existing.title,
+    description: data.description ?? existing.description,
+    images: data.images ?? existing.images,
+    coverIndex: data.coverIndex ?? existing.coverIndex,
+  }
+  await portfolioStore("looks").setJSON(id, updated)
   return updated
 }
 
 export async function deleteLook(id: string): Promise<boolean> {
-  const db = await ensureDb()
-  const result = await db.execute({
-    sql: "DELETE FROM looks WHERE id = ?",
-    args: [id],
-  })
-  return result.rowsAffected > 0
+  if (!(await getLook(id))) return false
+  await portfolioStore("looks").delete(id)
+  return true
 }

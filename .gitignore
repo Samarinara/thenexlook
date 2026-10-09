@@ -29,8 +29,13 @@ yarn-error.log*
 pnpm-debug.log*
 
 # env files
-.env*.local
+.env*
+!.env.example
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Netlify local state and database exports
+.netlify/
+looks-export.json
