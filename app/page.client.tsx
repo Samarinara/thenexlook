@@ -67,7 +67,7 @@ export default function Page({ looks }: { looks: Look[] }) {
               variants={itemVariants}
               className="mt-8 max-w-md text-xl leading-snug font-base sm:text-2xl"
             >
-              Hi I'm <span className="text-yellow">Nex Zimelstern,</span> I specialize in film, TV, and special effects
+              Hi I'm <span className="text-yellow">Nex Zimelstern,</span> I specialize in film, TV, and special effects makeup
               <span className="mt-2 block text-main-foreground/80 italic underline decoration-2 underline-offset-4">
                 Based in Vancouver, CA
               </span>
