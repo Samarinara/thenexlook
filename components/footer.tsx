@@ -18,7 +18,7 @@ export function Footer() {
               LET&apos;S <br /> CONNECT
             </h2>
             <p className="mt-8 max-w-md text-xl font-base text-main-foreground/80 sm:text-2xl">
-              Ready to transform your look? Follow for daily inspiration or
+              Ready to transform your look? Follow for inspiration or
               reach out for bookings.
             </p>
           </div>

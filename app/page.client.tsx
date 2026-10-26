@@ -50,6 +50,7 @@ export default function Page({ looks }: { looks: Look[] }) {
             animate="visible"
             className="relative z-10"
           >
+            {" "}
             <motion.div
               variants={itemVariants}
               className="mb-6 flex items-center gap-2"

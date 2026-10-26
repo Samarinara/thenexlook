@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 const SOCIALS = [
   {
     name: "Instagram",
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/the_nex_look/",
     icon: ({ className }: { className?: string }) => (
       <svg
         viewBox="0 0 24 24"
@@ -26,7 +26,7 @@ const SOCIALS = [
   },
   {
     name: "TikTok",
-    href: "https://tiktok.com",
+    href: "https://www.tiktok.com/@the_nex_look",
     icon: ({ className }: { className?: string }) => (
       <svg
         viewBox="0 0 24 24"
@@ -42,27 +42,10 @@ const SOCIALS = [
     ),
     color: "hover:bg-[#000000] hover:text-white",
   },
-  {
-    name: "Twitter",
-    href: "https://twitter.com",
-    icon: ({ className }: { className?: string }) => (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={className}
-      >
-        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-      </svg>
-    ),
-    color: "hover:bg-[#1DA1F2] hover:text-white",
-  },
+
   {
     name: "Email",
-    href: "mailto:hello@thenexlook.com",
+    href: "mailto:thenexlookmakeup@gmail.com",
     icon: Mail,
     color: "hover:bg-main hover:text-main-foreground",
   },
