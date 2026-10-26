@@ -39,7 +39,7 @@ export default function Page({ looks }: { looks: Look[] }) {
     <main className="relative min-h-svh overflow-hidden">
       <ScrollProgress />
       {/* Split-Screen Hero */}
-      <section className="relative flex min-h-[90vh] flex-col overflow-hidden border-b-2 border-border md:flex-row">
+      <section className="relative flex flex-col overflow-hidden border-b-2 border-border md:flex-row">
         <div className="flex flex-1 flex-col justify-center bg-main p-8 text-main-foreground md:p-16 lg:p-24">
           <motion.div
             variants={containerVariants}
