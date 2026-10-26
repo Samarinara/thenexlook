@@ -70,9 +70,9 @@ export default function Page({ looks }: { looks: Look[] }) {
               variants={itemVariants}
               className="mt-8 max-w-md text-xl leading-snug font-base sm:text-2xl"
             >
-              Something that makes you sound cool
+              I specialize in film, TV, and special effects
               <span className="mt-2 block text-main-foreground/80 italic underline decoration-2 underline-offset-4">
-                Second, better subtitle
+                Based in Vancouver, CA
               </span>
             </motion.p>
             <motion.div variants={itemVariants} className="mt-12">
@@ -208,10 +208,6 @@ export default function Page({ looks }: { looks: Look[] }) {
         speed={20}
         className="!bg-secondary-background"
       >
-        <span className="px-4 text-2xl font-heading tracking-widest text-foreground uppercase">
-          LET&apos;S CREATE SOMETHING UNFORGETTABLE • AVAILABLE FOR BOOKING •
-          STUDIO OPEN NOW •{" "}
-        </span>
       </Marquee>
     </main>
   )
