@@ -1,4 +1,4 @@
-import { portfolioStore } from "@/lib/storage"
+import { getImage } from "@/lib/storage"
 import { IMAGE_TYPES } from "@/lib/images"
 
 export const runtime = "nodejs"
@@ -10,9 +10,7 @@ export async function GET(
   const { key } = await params
   if (!/^[a-f0-9-]{36}$/.test(key))
     return new Response("Not found", { status: 404 })
-  const result = await portfolioStore("images").getWithMetadata(key, {
-    type: "arrayBuffer",
-  })
+  const result = await getImage(key)
   if (!result) return new Response("Not found", { status: 404 })
   const contentType = String(result.metadata.contentType)
   if (!IMAGE_TYPES.includes(contentType))

@@ -5,9 +5,7 @@ import { PortfolioGrid } from "@/components/portfolio-grid"
 import { motion, Variants } from "framer-motion"
 import { ArrowRight, Star } from "lucide-react"
 import { Marquee } from "@/components/ui/marquee"
-import { FloatingDecor } from "@/components/ui/floating-decor"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
-import { SocialLinks } from "@/components/social-links"
 
 export default function Page({ looks }: { looks: Look[] }) {
   const featuredLook = looks[0]
@@ -42,8 +40,7 @@ export default function Page({ looks }: { looks: Look[] }) {
       <ScrollProgress />
       {/* Split-Screen Hero */}
       <section className="relative flex min-h-[90vh] flex-col overflow-hidden border-b-2 border-border md:flex-row">
-        <div className="flex flex-1 flex-col justify-center bg-main p-8 md:p-16 lg:p-24">
-          <FloatingDecor />
+        <div className="flex flex-1 flex-col justify-center bg-main p-8 text-main-foreground md:p-16 lg:p-24">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -57,7 +54,7 @@ export default function Page({ looks }: { looks: Look[] }) {
             >
               <span className="h-0.5 w-12 bg-main-foreground" />
               <span className="font-heading tracking-tighter text-main-foreground uppercase">
-                Makeup Artistry
+                Nex Zimelstern
               </span>
             </motion.div>
             <motion.h1
@@ -70,12 +67,12 @@ export default function Page({ looks }: { looks: Look[] }) {
               variants={itemVariants}
               className="mt-8 max-w-md text-xl leading-snug font-base sm:text-2xl"
             >
-              I specialize in film, TV, and special effects
+              Hi I'm <span className="text-yellow">Nex Zimelstern,</span> I specialize in film, TV, and special effects
               <span className="mt-2 block text-main-foreground/80 italic underline decoration-2 underline-offset-4">
                 Based in Vancouver, CA
               </span>
             </motion.p>
-            <motion.div variants={itemVariants} className="mt-12">
+            <motion.div variants={itemVariants} className="mt-12 flex flex-wrap gap-4">
               <button
                 onClick={() =>
                   document
@@ -84,8 +81,17 @@ export default function Page({ looks }: { looks: Look[] }) {
                 }
                 className="group inline-flex items-center gap-4 rounded-base border-2 border-border bg-secondary-background px-8 py-4 text-xl font-heading text-foreground shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"
               >
-                DISCOVER COLLECTION
-                <ArrowRight className="size-6 transition-transform group-hover:translate-x-2" />
+                View my Work
+              </button>
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="inline-flex items-center justify-center rounded-base border-2 border-border bg-yellow px-8 py-4 text-xl font-heading text-foreground shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"
+              >
+                Get in Touch
               </button>
             </motion.div>
           </motion.div>
@@ -105,29 +111,26 @@ export default function Page({ looks }: { looks: Look[] }) {
                   featuredLook.images[0]
                 }
                 alt="Hero Portfolio"
-                className="size-full object-cover grayscale transition-all duration-700 hover:grayscale-0"
+                className="size-full object-cover transition-all duration-700"
               />
             )}
           </motion.div>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-main/30 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-violet/40 to-transparent" />
         </div>
       </section>
 
       {/* High-Energy Marquee */}
-      <Marquee speed={15} className="!py-6">
+      <Marquee speed={120} className="!bg-yellow !py-6">
         {[
           "FILM",
-          "RUNWAY",
-          "BRIDAL",
           "TELEVISION",
           "SPECIAL EFFECTS",
-          "GLAMOUR",
         ].map((text) => (
           <div key={text} className="flex items-center gap-8">
-            <span className="text-3xl font-heading tracking-widest text-main-foreground uppercase">
+            <span className="text-3xl font-heading tracking-widest text-foreground uppercase">
               {text}
             </span>
-            <Star className="size-6 fill-main-foreground text-main-foreground" />
+            <Star className="size-6 fill-foreground text-foreground" />
           </div>
         ))}
       </Marquee>
@@ -157,7 +160,7 @@ export default function Page({ looks }: { looks: Look[] }) {
                 </motion.div>
               </div>
               <div className="order-1 lg:order-2">
-                <span className="mb-6 inline-block rounded-base border-2 border-border bg-main px-4 py-1 text-xs font-heading text-main-foreground uppercase">
+                <span className="mb-6 inline-block rounded-base border-2 border-border bg-yellow px-4 py-1 text-xs font-heading text-foreground uppercase">
                   Latest Project
                 </span>
                 <h2 className="mb-8 text-5xl leading-tight font-heading sm:text-7xl">
@@ -174,7 +177,7 @@ export default function Page({ looks }: { looks: Look[] }) {
                   }
                   className="group flex items-center gap-3 text-2xl font-heading"
                 >
-                  <span className="underline decoration-main decoration-4 underline-offset-8 transition-all group-hover:text-main">
+                  <span className="underline decoration-yellow decoration-4 underline-offset-8 transition-all group-hover:text-violet">
                     DISCOVER COLLECTION
                   </span>
                   <ArrowRight className="size-8 transition-transform group-hover:translate-x-3" />
@@ -189,7 +192,7 @@ export default function Page({ looks }: { looks: Look[] }) {
       <section id="portfolio" className="bg-background pb-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-20 flex flex-col items-center text-center">
-            <h2 className="text-7xl leading-none font-heading opacity-10 sm:text-9xl">
+            <h2 className="text-7xl leading-none font-heading text-violet opacity-30 sm:text-9xl">
               GALLERY
             </h2>
             <div className="-mt-12 sm:-mt-16">
@@ -202,13 +205,6 @@ export default function Page({ looks }: { looks: Look[] }) {
         </div>
       </section>
 
-      {/* Closing Marquee */}
-      <Marquee
-        direction="right"
-        speed={20}
-        className="!bg-secondary-background"
-      >
-      </Marquee>
     </main>
   )
 }

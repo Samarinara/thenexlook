@@ -38,4 +38,5 @@ next-env.d.ts
 
 # Netlify local state and database exports
 .netlify/
+data/local/
 looks-export.json

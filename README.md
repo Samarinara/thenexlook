@@ -38,14 +38,14 @@ Inspect every imported look on the new site, test creating/editing/deleting a lo
 
 ## Development
 
-Use Node 22. Copy `.env.example` to `.env.local` and fill in the studio values.
+Use Node 22 or Bun. Copy `.env.example` to `.env.local` and fill in the studio values.
 
 ```sh
 pnpm install --frozen-lockfile
-pnpm --package=netlify-cli dlx netlify dev
+bun run dev
 ```
 
-Netlify Dev supplies a sandboxed local Blobs store. Plain `next dev` does not supply Blobs credentials. Local data is separate from production. The portfolio initially has no looks; add them through `/studio`.
+Plain `bun run dev` stores looks and photos in ignored `data/local/`, with no Netlify credentials required. Local data is separate from production. The portfolio initially has no looks; add them through `/studio`. Netlify Dev can still supply its sandboxed Blobs store when run through `pnpm --package=netlify-cli dlx netlify dev`.
 
 ```sh
 pnpm test

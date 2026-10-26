@@ -1,6 +1,6 @@
 import { cookies } from "next/headers"
 import { verifySessionToken } from "@/lib/auth"
-import { portfolioStore } from "@/lib/storage"
+import { putImage } from "@/lib/storage"
 import { detectImageType, MAX_IMAGE_BYTES } from "@/lib/images"
 
 export const runtime = "nodejs"
@@ -40,9 +40,7 @@ export async function POST(req: Request) {
   }
   try {
     const key = crypto.randomUUID()
-    await portfolioStore("images").set(key, bytes, {
-      metadata: { contentType },
-    })
+    await putImage(key, bytes, contentType)
     return Response.json({ url: `/api/images/${key}` }, { status: 201 })
   } catch {
     return Response.json(

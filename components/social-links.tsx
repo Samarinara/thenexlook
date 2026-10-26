@@ -22,7 +22,7 @@ const SOCIALS = [
         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
       </svg>
     ),
-    color: "hover:bg-[#E1306C] hover:text-white",
+    color: "hover:bg-violet hover:text-white",
   },
   {
     name: "TikTok",
@@ -40,14 +40,14 @@ const SOCIALS = [
         <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
       </svg>
     ),
-    color: "hover:bg-[#000000] hover:text-white",
+    color: "hover:bg-main hover:text-main-foreground",
   },
 
   {
     name: "Email",
     href: "mailto:thenexlookmakeup@gmail.com",
     icon: Mail,
-    color: "hover:bg-main hover:text-main-foreground",
+    color: "hover:bg-yellow hover:text-foreground",
   },
 ]
 
